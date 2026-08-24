@@ -8,6 +8,8 @@
   "dependencies": {
     "@remotion/cli": "4.0.507",
     "@remotion/google-fonts": "^4.0.507",
+    "@remotion/media": "4.0.507",
+    "@remotion/media-utils": "4.0.507",
     "@remotion/tailwind-v4": "4.0.507",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -16,6 +18,7 @@
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.507",
+    "@types/node": "^22.20.1",
     "@types/react": "19.2.7",
     "@types/web": "0.0.166",
     "eslint": "9.19.0",
