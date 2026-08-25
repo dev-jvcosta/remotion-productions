@@ -54,15 +54,15 @@ Acesse `http://localhost:3000` no navegador.
 ---
 
 ### Passo 4: Renderizar o vídeo (.mp4)
-Gere o arquivo final com a versão incrementada:
+Gere o arquivo final dentro de `out/Renders/` seguindo o padrão `aaaa_mm_dd_render_vx.mp4`:
 
 ```bash
-npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
+npx remotion render UltimosTurnos out/Renders/2026_08_25_render_v8.mp4
 ```
 
-Se precisar gerar prints de validação (stills), use o diretório `out/Revs/`:
+Se precisar gerar prints de validação (stills), salve dentro de `out/Revs/rev<N>/`:
 ```bash
-npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250
+npx remotion still UltimosTurnos out/Revs/rev8/f1250.png --frame=1250
 ```
 
 ---
@@ -71,9 +71,9 @@ npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250
 Gere os arquivos de legenda e revisão a partir do vídeo exportado:
 
 ```bash
-node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/UltimosTurnos_v7.mp4
+node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/Renders/2026_08_25_render_v8.mp4
 ```
 
 Os arquivos resultantes estarão em `out/transcrição/`:
-- `out/transcrição/UltimosTurnos_v7.srt` (Legendas)
-- `out/transcrição/UltimosTurnos_v7.txt` (Transcrição corrida)
+- `out/transcrição/2026_08_25_render_v8.srt` (Legendas)
+- `out/transcrição/2026_08_25_render_v8.txt` (Transcrição corrida)

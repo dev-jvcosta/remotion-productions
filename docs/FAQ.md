@@ -53,15 +53,17 @@ npm run dev
 
 ## 3. Como renderizar uma nova versão do vídeo (.mp4)?
 
-Para renderizar o vídeo completo em formato MP4 (H.264), use o comando da CLI do Remotion:
+Para renderizar o vídeo completo em formato MP4 (H.264), salve na pasta `out/Renders/` utilizando o padrão de data e versão `aaaa_mm_dd_render_vx.mp4`:
 
 ```bash
-npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
+# Exemplo para a versão 8 renderizada no dia 25/08/2026:
+npx remotion render UltimosTurnos out/Renders/2026_08_25_render_v8.mp4
 ```
 
-### Dicas de versionamento:
-- Salve sempre na pasta `out/`.
-- Incremente o sufixo de versão (`_v1`, `_v2`, `_v3`, ..., `_v7`) para manter o histórico de entregas sem sobrescrever arquivos que possam estar em uso no Final Cut ou drive compartilhado.
+### Regra de Nomenclatura dos Renders:
+- **Diretório obrigatório:** Todos os vídeos finais devem ser salvos dentro de `out/Renders/`.
+- **Formato do nome:** `aaaa_mm_dd_render_vx.mp4` (onde `aaaa` é o ano, `mm` o mês, `dd` o dia e `x` o número sequencial da versão).
+- **Vantagem:** Mantém o histórico ordenado por data e versão sem sobrescrever renders anteriores.
 
 ---
 
@@ -70,7 +72,7 @@ npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
 Você pode usar o parâmetro `--frames` no comando de render para exportar apenas um intervalo de frames (inclusive com áudio):
 
 ```bash
-npx remotion render UltimosTurnos out/trecho_cena6.mp4 --frames=1707-1930
+npx remotion render UltimosTurnos out/Renders/2026_08_25_trecho_cena6.mp4 --frames=1707-1930
 ```
 
 ### Como saber os frames de cada cena?
@@ -80,14 +82,14 @@ Os frames de início e duração de cada cena podem ser visualizados na régua d
 
 ## 5. Como renderizar apenas um frame congelado (Still / PNG)?
 
-Para exportar uma imagem estática (PNG) em alta qualidade de um frame específico:
+Para exportar uma imagem estática (PNG) em alta qualidade de um frame específico para revisão:
 
 ```bash
-# Renderiza o frame 1250 em tamanho real (1920x1080)
-npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250
+# Renderiza o frame 1250 em tamanho real (1920x1080) na pasta da revisão correspondente:
+npx remotion still UltimosTurnos out/Revs/rev8/f1250.png --frame=1250
 
-# Renderiza com escala reduzida (50%) para conferência rápida
-npx remotion still UltimosTurnos out/Revs/rev7/f1250_thumb.png --frame=1250 --scale=0.5
+# Renderiza com escala reduzida (50%) para conferência rápida:
+npx remotion still UltimosTurnos out/Revs/rev8/f1250_thumb.png --frame=1250 --scale=0.5
 ```
 
 ---
@@ -97,11 +99,11 @@ npx remotion still UltimosTurnos out/Revs/rev7/f1250_thumb.png --frame=1250 --sc
 Para extrair o áudio e gerar automaticamente a legenda formatada (`.srt`) e a revisão em texto corrido (`.txt`):
 
 ```bash
-# Para um vídeo específico:
-node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/UltimosTurnos_v7.mp4
-
-# Ou omitindo o argumento (ele seleciona automaticamente o .mp4 mais recente em out/):
+# Omitindo o argumento (ele seleciona automaticamente o .mp4 mais recente em out/Renders/):
 node --env-file=.env --strip-types scripts/gerar-transcricao.ts
+
+# Ou apontando para um vídeo específico:
+node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/Renders/2026_08_25_render_v8.mp4
 ```
 
 ### Arquivos gerados em `out/transcrição/`:
@@ -121,30 +123,35 @@ node --env-file=.env --strip-types scripts/gerar-transcricao.ts
 
 ---
 
-## 8. Qual é a regra para a pasta de revisões `out/Revs/`?
+## 8. Qual é a regra para as pastas `out/Renders/` e `out/Revs/`?
 
-Todas as pastas de revisão de frames e checagens estáticas (stills) devem ser organizadas dentro do diretório **`out/Revs/`**.
+A pasta `out/` é organizada de forma limpa e modular:
 
 ### Estrutura padronizada:
 ```text
 out/
-├── UltimosTurnos_v1.mp4
-├── UltimosTurnos_v7.mp4
-├── transcrição/
-│   ├── UltimosTurnos_v7.srt
-│   └── UltimosTurnos_v7.txt
-└── Revs/
-    ├── rev2/
-    ├── rev3/
-    ├── rev4/
-    ├── rev5/
-    ├── rev6/
-    └── rev7/
-        ├── f420.png
-        └── f1250.png
+├── Renders/
+│   ├── UltimosTurnos_v1.mp4
+│   ├── UltimosTurnos_v7.mp4
+│   └── 2026_08_25_render_v8.mp4    <-- padrão para novos renders
+├── Revs/
+│   ├── rev2/
+│   ├── rev3/
+│   ├── rev4/
+│   ├── rev5/
+│   ├── rev6/
+│   ├── rev7/
+│   └── rev8/                       <-- padrão para novas revisões de stills
+│       ├── f420.png
+│       └── f1250.png
+└── transcrição/
+    ├── 2026_08_25_render_v8.srt
+    └── 2026_08_25_render_v8.txt
 ```
 
-> 📌 **Regra para novas revisões:** Sempre que for gerar prints/stills de uma nova revisão (ex: revisão 7), salve dentro de `out/Revs/rev7/`.
+> 📌 **Regras de ouro:**
+> 1. **Vídeos (.mp4):** Devem sempre ir para `out/Renders/` no formato `aaaa_mm_dd_render_vx.mp4`.
+> 2. **Imagens de revisão (stills .png):** Devem sempre ir para `out/Revs/rev<N>/`.
 
 ---
 

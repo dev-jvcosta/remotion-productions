@@ -20,26 +20,26 @@ npm run dev
 # 2. Gerar ou atualizar a locução com IA (ElevenLabs)
 node --env-file=.env --strip-types scripts/gerar-locucao.ts --forcar
 
-# 3. Renderizar o vídeo completo em MP4
-npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
+# 3. Renderizar o vídeo completo em MP4 (padrão: out/Renders/aaaa_mm_dd_render_vX.mp4)
+npx remotion render UltimosTurnos out/Renders/2026_08_25_render_v8.mp4
 
 # 4. Renderizar um Still (imagem PNG de um frame específico)
-npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250
+npx remotion still UltimosTurnos out/Revs/rev8/f1250.png --frame=1250
 
 # 5. Renderizar apenas um trecho/cena específica do vídeo
-npx remotion render UltimosTurnos out/trecho_cena6.mp4 --frames=1707-1930
+npx remotion render UltimosTurnos out/Renders/2026_08_25_trecho_cena6.mp4 --frames=1707-1930
 
 # 6. Gerar transcrição e legendas (.srt e .txt) do vídeo renderizado
-node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/UltimosTurnos_v7.mp4
+node --env-file=.env --strip-types scripts/gerar-transcricao.ts
 ```
 
 ---
 
 ## 📂 Estrutura das Pastas de Saída (`out/`)
 
-| Diretório | O que deve conter |
-|---|---|
-| `out/` | Vídeos finais exportados (`UltimosTurnos_v1.mp4`, `UltimosTurnos_v2.mp4`, etc.) |
-| `out/Revs/rev<N>/` | Frames estáticos (`.png`) gerados para revisão visual de cada versão (ex: `out/Revs/rev7/`) |
-| `out/transcrição/` | Arquivos de legenda (`.srt`), texto de revisão (`.txt`) e áudios extraídos |
-| `out/checks/` | Capturas rápidas de validação |
+| Diretório | Padrão de Nomenclatura | O que deve conter |
+|---|---|---|
+| `out/Renders/` | `aaaa_mm_dd_render_vX.mp4` | Vídeos finais renderizados em MP4 |
+| `out/Revs/rev<N>/` | `f<frame>.png` | Frames estáticos (stills) gerados para revisão visual |
+| `out/transcrição/` | `<nome_do_render>.srt` / `.txt` | Arquivos de legenda (`.srt`), texto de revisão (`.txt`) e áudios extraídos |
+| `out/checks/` | `*.png` | Capturas rápidas de validação |

@@ -269,13 +269,13 @@ erro. É o que permite mexer no visual sem depender da API.
 
 ```bash
 npm run dev                       # Studio
-npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
+npx remotion render UltimosTurnos out/Renders/2026_08_25_render_v8.mp4
 ```
 
 Um frame só (still), para conferir rápido (salvar na pasta de revisão `out/Revs/`):
 
 ```bash
-npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250 --scale=0.5
+npx remotion still UltimosTurnos out/Revs/rev8/f1250.png --frame=1250 --scale=0.5
 ```
 
 > 📖 Para dúvidas de comandos, recortes de cenas e transcrição, consulte o [FAQ do Projeto](file:///Users/jvcosta/Development/Projetos/remotion-productions/docs/FAQ.md).
