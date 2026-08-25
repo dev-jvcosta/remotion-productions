@@ -1,6 +1,6 @@
 # UltimosTurnos — "O que mudou nos Últimos Turnos"
 
-Vídeo horizontal 1920×1080, 30 fps, ~67 s, usado no
+Vídeo horizontal 1920×1080, 30 fps, ~64 s, usado no
 **VD-014 — Pontuação · Últimos Turnos**.
 
 Explica para o motorista as duas mudanças na tabela **Últimos Turnos**, dentro
@@ -86,13 +86,13 @@ Cenas (frames absolutos, 30 f = 1 s):
 
 | Cena | Começa | Dura | Conteúdo |
 |---|---|---|---|
-| 1 · Gancho | 0 | 228 | Título "O que mudou nos Últimos Turnos" |
-| 2 · Antes | 228 | 359 | Coluna `Km/l` acesa |
-| 3 · Renomeia | 587 | 199 | `Km/l` → `Mot.` + selo MESMO CÁLCULO |
-| 4 · Coluna nova | 786 | 357 | Entra a `Ant.` + regra das cores |
-| 5 · Exemplo | 1143 | 316 | Linha 20/08 acesa + as duas etiquetas |
-| 6 · Fecho | 1459 | 292 | `0,00` sem dado + as duas perguntas |
-| **Total** | | **1751** | ~58,4 s |
+| 1 · Gancho | 0 | 241 | Título "O que mudou nos Últimos Turnos" |
+| 2 · Antes | 241 | 466 | Coluna `Km/l` acesa |
+| 3 · Renomeia | 707 | 251 | `Km/l` → `Mot.` + selo MESMO CÁLCULO |
+| 4 · Coluna nova | 958 | 363 | Entra a `Ant.` + regra das cores |
+| 5 · Exemplo | 1321 | 386 | Linha 20/08 acesa + as duas etiquetas |
+| 6 · Fecho | 1707 | 223 | As duas perguntas, em tela cheia |
+| **Total** | | **1930** | ~64,3 s |
 
 > Esses números mudam sozinhos sempre que a locução é regerada. Os pontos de
 > sincronia **dentro** de cada cena (quando o subtítulo entra, quando um selo
@@ -105,13 +105,13 @@ isso continuam certas mesmo quando a locução muda de tamanho):
 | Quando | O quê |
 |---|---|
 | `inicio2` → `+16` | tabela entra |
-| `inicio2 + 27` | coluna `Km/l` acende, resto apaga |
-| `inicio3 + 50` → `+71` | `Km/l` vira `Mot.` (crossfade no mesmo lugar) |
-| `inicio4 + 45` → `+65` | cabeçalho laranja agrupador aparece |
-| `inicio4 + 67` → `+103` | coluna `Ant.` abre e empurra o resto |
-| `inicio4 + 107` | coluna `Ant.` acende |
-| `inicio5 + 20` | linha do exemplo acende, resto apaga |
-| `inicio6 + 130` → `+155` | tabela sai, entram as duas perguntas |
+| `inicio2 + 36` | coluna `Km/l` acende, resto apaga |
+| `inicio3 + 64` → `+91` | `Km/l` vira `Mot.` (crossfade no mesmo lugar) |
+| `inicio4 + 46` → `+66` | cabeçalho laranja agrupador aparece |
+| `inicio4 + 68` → `+104` | coluna `Ant.` abre e empurra o resto |
+| `inicio4 + 109` | coluna `Ant.` acende |
+| `inicio5 + 25` | linha do exemplo acende, resto apaga |
+| `inicio6 - 8` → `+20` | tabela sai já na virada, dando a tela às perguntas |
 
 Dentro de cada cena os tempos são **frames locais** (a cena começa no 0), com
 os `interpolate()` inline em cada elemento — igual ao `RankSum`.
@@ -123,6 +123,11 @@ os `interpolate()` inline em cada elemento — igual ao `RankSum`.
 A tabela se **recentraliza sozinha** conforme a coluna `Ant.` entra, em vez de
 ficar torta em metade do vídeo. As posições saem das constantes no topo de
 `TabelaUltimosTurnos.tsx`.
+
+**Destaque de coluna:** quando uma coluna está acesa, TUDO o mais cai para
+`0.28` — inclusive o bloco escuro de Dia/Turno/Carro. Ele ficava aceso e, sendo
+o elemento de maior contraste da tela, roubava o olho justamente da coluna que
+a cena estava ensinando.
 
 | Item | Valor |
 |---|---|
@@ -138,9 +143,14 @@ ficar torta em metade do vídeo. As posições saem das constantes no topo de
 | Amarelo de destaque no texto | `#ffcc00` |
 
 Padrão de cabeçalho das cenas 2–5 (é o que dá a "harmonia" entre elas): eyebrow
-em `126`, traço amarelo em `172`, título 82 px em `200`, subtítulo 40 px em
-`344`. O salto de ~46 px entre título e subtítulo é proposital — é o que separa
-as duas hierarquias.
+em `126`, título 82 px em `200`, subtítulo 40 px em `344`. O salto de ~46 px
+entre título e subtítulo é proposital — é o que separa as duas hierarquias.
+
+**O traço amarelo é filho do eyebrow**, não um elemento solto. Como o eyebrow é
+absoluto e não tem largura, ele encolhe até o texto — então `width: "100%"` no
+traço É a largura do texto, e o sublinhado acompanha sozinho tanto
+`COMO ERA` quanto `A LEITURA QUE IMPORTA`. Antes era um valor fixo de 132 px que
+não servia para os dois.
 
 > **Por que a tabela foge da regra do `RankSum`.** O README do `RankSum` manda
 > não extrair valores para constantes, para o Studio conseguir editar estilo e
@@ -210,13 +220,33 @@ node --env-file=.env --strip-types scripts/gerar-transcricao.ts
 node --env-file=.env --strip-types scripts/gerar-transcricao.ts out/OutroVideo.mp4
 ```
 
-Sai em `out/transcrição/`: `<nome>.txt` (texto corrido) e `<nome>.srt`
-(legendas com tempo, prontas para o Final Cut ou YouTube).
+Sem argumento, o script pega o `.mp4` mais recente de `out/`. Sai em
+`out/transcrição/`, os dois com timestamp:
+
+- **`<nome>.txt`** — cabeçalho + blocos numerados, quebrados **por frase**. É o
+  formato de revisão: dá para ler o vídeo inteiro sem abrir o vídeo.
+
+  ```
+  [05]  00:00:13,539 --> 00:00:19,180
+        Ela fica verde quando você alcança a média da linha...
+  ```
+
+- **`<nome>.srt`** — legendas de verdade, quebradas em ~42 caracteres, prontas
+  para o Final Cut ou YouTube.
+
+Os dois saem do mesmo agrupador; muda só o limite de caracteres. Legenda é lida
+de relance e por isso quebra curto; texto de revisão quebra por frase, porque
+ler um parágrafo picado em pedaços de 42 caracteres é pior que ler a frase.
 
 Transcreve o **áudio renderizado**, não o `roteiro.ts` — é assim que se descobre
 o que a voz realmente falou. Foi o que confirmou que `Mot.` e `Ant.` saem como
 "Mot" e "Ant" (certo) e que `Km/l` vira "quilômetros por litro" (certo também).
 O roteiro nunca denunciaria uma pronúncia errada.
+
+Também é onde aparecem os cochilos de entonação do v3: hoje ele fecha ponto
+final depois de "no mesmo dia" e recomeça em "Turno, carro e linha", partindo
+a enumeração em duas (blocos 05 e 06). Não atrapalha o entendimento, mas é do
+tipo de coisa que só se vê lendo a transcrição.
 
 ---
 
@@ -239,14 +269,16 @@ erro. É o que permite mexer no visual sem depender da API.
 
 ```bash
 npm run dev                       # Studio
-npx remotion render UltimosTurnos out/UltimosTurnos_v3.mp4
+npx remotion render UltimosTurnos out/UltimosTurnos_v7.mp4
 ```
 
-Um frame só, para conferir rápido:
+Um frame só (still), para conferir rápido (salvar na pasta de revisão `out/Revs/`):
 
 ```bash
-npx remotion still UltimosTurnos out/teste.png --frame=1250 --scale=0.5
+npx remotion still UltimosTurnos out/Revs/rev7/f1250.png --frame=1250 --scale=0.5
 ```
+
+> 📖 Para dúvidas de comandos, recortes de cenas e transcrição, consulte o [FAQ do Projeto](file:///Users/jvcosta/Development/Projetos/remotion-productions/docs/FAQ.md).
 
 Entrega para o Final Cut (a pasta `VD-014_…` precisa ser criada no drive, com
 os subdiretórios do padrão — `ASSETS/RemotionOut/`, `AUDIO/`, `CAPTIONS/`,
