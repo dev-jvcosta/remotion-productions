@@ -19,24 +19,34 @@ import { join, basename, extname } from "node:path";
 import { execFileSync } from "node:child_process";
 import { requireEnv } from "./lib/env.ts";
 
-/** Sem argumento, pega o render mais recente de `out/` — o padrão fixo apodrecia a cada versão. */
+/** Sem argumento, pega o render mais recente de `out/Renders/` ou `out/`. */
 const maisRecente = () => {
-  const dir = join(process.cwd(), "out");
-  if (!existsSync(dir)) return "";
+  const dirs = [
+    join(process.cwd(), "out", "Renders"),
+    join(process.cwd(), "out"),
+  ];
 
-  const videos = readdirSync(dir)
-    .filter((f) => f.endsWith(".mp4"))
-    .map((f) => ({ f, t: statSync(join(dir, f)).mtimeMs }))
-    .sort((a, b) => b.t - a.t);
+  const videos: { path: string; t: number }[] = [];
 
-  return videos.length > 0 ? join("out", videos[0].f) : "";
+  for (const dir of dirs) {
+    if (!existsSync(dir)) continue;
+    for (const f of readdirSync(dir)) {
+      if (f.endsWith(".mp4")) {
+        const fullPath = join(dir, f);
+        videos.push({ path: fullPath, t: statSync(fullPath).mtimeMs });
+      }
+    }
+  }
+
+  videos.sort((a, b) => b.t - a.t);
+  return videos.length > 0 ? videos[0].path : "";
 };
 
 const entrada = process.argv[2] ?? maisRecente();
 
 if (!entrada || !existsSync(entrada)) {
-  console.error(`Vídeo não encontrado: ${entrada || "(nenhum .mp4 em out/)"}`);
-  console.error("Renderize primeiro: npx remotion render UltimosTurnos out/UltimosTurnos_v4.mp4");
+  console.error(`Vídeo não encontrado: ${entrada || "(nenhum .mp4 em out/Renders/ ou out/)"}`);
+  console.error("Renderize primeiro: npx remotion render UltimosTurnos out/Renders/aaaa_mm_dd_render_vX.mp4");
   process.exit(1);
 }
 
