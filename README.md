@@ -37,7 +37,13 @@ npx remotion render
 npx remotion upgrade
 ```
 
-## Docs
+## 📚 Documentação do Projeto
+
+Consulte a pasta [`docs/`](file:///Users/jvcosta/Development/Projetos/remotion-productions/docs/README.md) para os guias e respostas rápidas:
+- ❓ **[FAQ — Perguntas Frequentes](file:///Users/jvcosta/Development/Projetos/remotion-productions/docs/FAQ.md)** (Onde alterar, como renderizar, gerar legendas, renderizar cenas específicas, etc.)
+- 🎬 **[Guia de Produção](file:///Users/jvcosta/Development/Projetos/remotion-productions/docs/GUIA_DE_PRODUCAO.md)** (Fluxo completo de roteiro, áudio, render e transcrição)
+
+## Docs Oficiais Remotion
 
 Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
 
