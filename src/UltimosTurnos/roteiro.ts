@@ -40,21 +40,21 @@ export const ROTEIRO: CenaRoteiro[] = [
     id: "cena-02",
     titulo: "O que já existia",
     narracao:
-      "Esta coluna se chamava Km por litro: é a sua média no turno. Ela fica verde quando você alcança a média da linha, a média de todos que rodaram no mesmo dia, turno, carro e linha.",
+      "Esta coluna se chamava Km por litro: é a sua média na linha e turno. Ela fica verde quando você alcança ou supera a média da linha geral, a média de todos que rodaram no mesmo dia, turno, carro e linha.",
     duracaoFallbackEmSegundos: 11,
   },
   {
     id: "cena-03",
     titulo: "Só o nome mudou",
     narracao:
-      "Agora ela se chama Mot., de motorista. Mudou só o nome. O cálculo e as cores continuam iguais.",
+      "Agora ela se chama Mot., de motorista. Apenas o nome mudou. O cálculo e as cores continuam iguais.",
     duracaoFallbackEmSegundos: 8,
   },
   {
     id: "cena-04",
     titulo: "A coluna nova",
     narracao:
-      "A novidade é a coluna Ant., de anterior. Ela mostra a sua média da semana passada. Se a sua média de agora for igual ou maior, ela fica verde. Se for menor, fica vermelha.",
+      "A novidade é a coluna Ant., de anterior. Ela mostra a sua média da semana passada. Se Mot. for igual ou maior que Ant., fica verde. Se for menor, fica vermelha.",
     duracaoFallbackEmSegundos: 12,
   },
   {
@@ -68,8 +68,8 @@ export const ROTEIRO: CenaRoteiro[] = [
     id: "cena-06",
     titulo: "Fecho",
     narracao:
-      "E se aparecer zero, é porque ainda não existe dado da semana anterior. A cada turno, duas perguntas: fui melhor que a linha? Fui melhor que eu mesmo?",
-    duracaoFallbackEmSegundos: 9,
+      "A cada turno, duas perguntas: fui melhor que a linha? Fui melhor que eu mesmo na semana anterior?",
+    duracaoFallbackEmSegundos: 5,
   },
 ];
 

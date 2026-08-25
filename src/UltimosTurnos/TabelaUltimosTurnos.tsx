@@ -203,6 +203,10 @@ export const TabelaUltimosTurnos: React.FC<TabelaProps> = ({
                 color: "#FFFFFF",
                 fontSize: 38,
                 fontWeight: 700,
+                // Apaga junto com as colunas vizinhas quando uma coluna está em
+                // destaque — antes o bloco escuro ficava aceso e roubava o olho
+                // justamente da coluna que a cena estava ensinando.
+                opacity: apagadaColuna("outra"),
               }}
             >
               <span style={{ width: L_DIA, textAlign: "center" }}>{linha.dia}</span>

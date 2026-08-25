@@ -132,9 +132,9 @@ export const UltimosTurnos: React.FC<UltimosTurnosProps> = ({
    * certos mesmo quando a locução muda de tamanho.
    * ------------------------------------------------------------------- */
   const destaqueColuna =
-    frame >= inicio2 + 31 && frame < inicio3
+    frame >= inicio2 + 36 && frame < inicio3
       ? "kml"
-      : frame >= inicio4 + 117 && frame < inicio5
+      : frame >= inicio4 + 109 && frame < inicio5
         ? "ant"
         : null;
 
@@ -144,19 +144,14 @@ export const UltimosTurnos: React.FC<UltimosTurnosProps> = ({
       style={{ backgroundColor: "#FCFBF5", fontFamily }}
     >
       <TabelaUltimosTurnos
-        revelarAnt={interpolate(
-          frame,
-          [inicio4 + 73, inicio4 + 112],
-          [0, 1],
-          {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.16, 1, 0.3, 1),
-          },
-        )}
+        revelarAnt={interpolate(frame, [inicio4 + 68, inicio4 + 104], [0, 1], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+          easing: Easing.bezier(0.16, 1, 0.3, 1),
+        })}
         renomearCabecalho={interpolate(
           frame,
-          [inicio3 + 58, inicio3 + 82],
+          [inicio3 + 64, inicio3 + 91],
           [0, 1],
           {
             extrapolateLeft: "clamp",
@@ -164,7 +159,7 @@ export const UltimosTurnos: React.FC<UltimosTurnosProps> = ({
             easing: Easing.bezier(0.16, 1, 0.3, 1),
           },
         )}
-        grupoKmL={interpolate(frame, [inicio4 + 49, inicio4 + 71], [0, 1], {
+        grupoKmL={interpolate(frame, [inicio4 + 46, inicio4 + 66], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
           easing: Easing.bezier(0.16, 1, 0.3, 1),
@@ -175,7 +170,7 @@ export const UltimosTurnos: React.FC<UltimosTurnosProps> = ({
         }
         opacidade={interpolate(
           frame,
-          [inicio2, inicio2 + 16, inicio6 + 161, inicio6 + 192],
+          [inicio2, inicio2 + 16, inicio6 - 8, inicio6 + 20],
           [0, 1, 1, 0],
           {
             extrapolateLeft: "clamp",

@@ -5,7 +5,7 @@ import {
   interpolate,
   useCurrentFrame,
   useVideoConfig,
-} from "remotion";
+} from 'remotion';
 
 /* Cena 2 — O que já existia.
  * Recapitula a coluna Km/l ANTES de mexer em qualquer nome. Sem essa base, a
@@ -23,8 +23,8 @@ export const Cena2Antes: React.FC = () => {
           [0, 10, durationInFrames - 10, durationInFrames - 1],
           [0, 1, 1, 0],
           {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp',
             easing: [
               Easing.bezier(0.16, 1, 0.3, 1),
               Easing.linear,
@@ -37,84 +37,83 @@ export const Cena2Antes: React.FC = () => {
       <Interactive.Div
         name="Eyebrow"
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: 161,
           top: 126,
-          color: "#111111",
+          color: '#111111',
           fontSize: 30,
           fontWeight: 700,
           letterSpacing: 4.8,
           opacity: interpolate(frame, [4, 16], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp',
             easing: Easing.bezier(0.16, 1, 0.3, 1),
           }),
         }}
       >
         COMO ERA
+        <Interactive.Div
+          name="Traco do eyebrow"
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 46,
+            height: 5,
+            borderRadius: 3,
+            backgroundColor: '#FDCA00',
+            width: interpolate(frame, [10, 24], ['0%', '100%'], {
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+              easing: Easing.bezier(0.16, 1, 0.3, 1),
+            }),
+          }}
+        />
       </Interactive.Div>
-
-      <Interactive.Div
-        name="Traco do eyebrow"
-        style={{
-          position: "absolute",
-          left: 161,
-          top: 172,
-          height: 5,
-          borderRadius: 3,
-          backgroundColor: "#FDCA00",
-          width: interpolate(frame, [10, 24], [0, 132], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.16, 1, 0.3, 1),
-          }),
-        }}
-      />
 
       <Interactive.Div
         name="Titulo"
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: 161,
           top: 200,
-          color: "#111111",
+          color: '#111111',
           fontSize: 82,
           fontWeight: 800,
           letterSpacing: -1.6,
           opacity: interpolate(frame, [10, 24], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp',
             easing: Easing.bezier(0.16, 1, 0.3, 1),
           }),
-          translate: interpolate(frame, [10, 26], ["0px 24px", "0px 0px"], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
+          translate: interpolate(frame, [10, 26], ['0px 24px', '0px 0px'], {
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp',
             easing: Easing.bezier(0.16, 1, 0.3, 1),
           }),
         }}
       >
-        <span style={{ color: "#ffcc00" }}>Km/l</span> = sua média no turno
+        <span style={{ color: '#ffcc00' }}>Km/l</span> = sua média na linha e
+        turno.
       </Interactive.Div>
 
       <Interactive.Div
         name="Subtitulo"
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: 161,
           top: 344,
-          color: "#111111",
+          color: '#111111',
           fontSize: 40,
           fontWeight: 500,
-          opacity: interpolate(frame, [150, 171], [0, 1], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
+          opacity: interpolate(frame, [172, 195], [0, 1], {
+            extrapolateLeft: 'clamp',
+            extrapolateRight: 'clamp',
             easing: Easing.bezier(0.16, 1, 0.3, 1),
           }),
         }}
       >
-        Fica verde quando você alcança a média da linha.
+        Fica verde quando você alcança ou supera a média da linha geral.
       </Interactive.Div>
-
     </AbsoluteFill>
   );
 };

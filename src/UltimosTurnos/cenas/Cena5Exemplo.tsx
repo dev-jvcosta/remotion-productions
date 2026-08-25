@@ -59,24 +59,25 @@ export const Cena5Exemplo: React.FC = () => {
         }}
       >
         A LEITURA QUE IMPORTA
+
+        <Interactive.Div
+          name="Traco do eyebrow"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 46,
+            height: 5,
+            borderRadius: 3,
+            backgroundColor: "#FDCA00",
+            width: interpolate(frame, [10, 24], ["0%", "100%"], {
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
+              easing: Easing.bezier(0.16, 1, 0.3, 1),
+            }),
+          }}
+        />
       </Interactive.Div>
 
-      <Interactive.Div
-        name="Traco do eyebrow"
-        style={{
-          position: "absolute",
-          left: 161,
-          top: 172,
-          height: 5,
-          borderRadius: 3,
-          backgroundColor: "#FDCA00",
-          width: interpolate(frame, [10, 24], [0, 132], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.16, 1, 0.3, 1),
-          }),
-        }}
-      />
 
       <Interactive.Div
         name="Titulo"
