@@ -103,3 +103,15 @@ export const provedorLocucao = (): Provedor => {
 
   return valor;
 };
+
+export type ConfigMagnific = {
+  apiKey: string;
+  webhookSigningSecret: string;
+};
+
+/** Credenciais e configurações da Magnific AI (upscaling / imagem). */
+export const magnific = (): ConfigMagnific => ({
+  apiKey: requireEnv("MAGNIFIC_API_KEY"),
+  webhookSigningSecret: optionalEnv("MAGNIFIC_WEBHOOK_SIGNING_SECRET", ""),
+});
+
