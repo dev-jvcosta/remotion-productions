@@ -8,6 +8,7 @@ Bem-vindo à documentação do repositório de vídeos em Remotion. Aqui você e
 
 - ❓ **[FAQ — Perguntas Frequentes](./FAQ.md)**: Respostas diretas sobre onde alterar textos, como renderizar, gerar legendas, renderizar apenas uma cena específica e regras de diretórios.
 - 🎬 **[Guia de Produção e Fluxo de Trabalho](./GUIA_DE_PRODUCAO.md)**: Passo a passo completo do ciclo de vida de um vídeo (Roteiro ➔ Áudio ➔ Visual ➔ Studio ➔ Render ➔ Transcrição).
+- 🎨 **[Magnific API — assets de IA](../.agents/skills/magnific-api/SKILL.md)**: Gerar imagens, vídeo (B-roll), trilha, efeitos sonoros e ícones por IA, além de buscar conteúdo de stock. Inclui um catálogo com todos os endpoints e um cliente pronto em `scripts/lib/magnific.ts`.
 
 ---
 
@@ -31,7 +32,19 @@ npx remotion render UltimosTurnos out/Renders/2026_08_25_trecho_cena6.mp4 --fram
 
 # 6. Gerar transcrição e legendas (.srt e .txt) do vídeo renderizado
 node --env-file=.env --strip-types scripts/gerar-transcricao.ts
+
+# 7. Gerar uma imagem com IA (Magnific) para usar numa cena
+node --env-file=.env --strip-types scripts/gerar-imagem-ia.ts \
+  --prompt "painel de instrumentos de caminhão ao amanhecer" \
+  --saida public/imagens/UltimosTurnos/fundo-cena-01.png
+
+# 8. Gerar um B-roll em vídeo com IA (Magnific)
+node --env-file=.env --strip-types scripts/gerar-video-ia.ts \
+  --prompt "estrada de serra vista de cima, câmera avançando devagar" \
+  --duracao 6 --saida public/videos/UltimosTurnos/broll-serra.mp4
 ```
+
+> Rode os scripts 7 e 8 sem argumentos para ver todas as opções e a lista de modelos.
 
 ---
 
@@ -43,3 +56,18 @@ node --env-file=.env --strip-types scripts/gerar-transcricao.ts
 | `out/Revs/rev<N>/` | `f<frame>.png` | Frames estáticos (stills) gerados para revisão visual |
 | `out/transcrição/` | `<nome_do_render>.srt` / `.txt` | Arquivos de legenda (`.srt`), texto de revisão (`.txt`) e áudios extraídos |
 | `out/checks/` | `*.png` | Capturas rápidas de validação |
+
+---
+
+## 🎨 Assets Gerados por IA (`public/`)
+
+Tudo que o Remotion consome via `staticFile()` vive em `public/`, separado por composição:
+
+| Diretório | O que contém | Gerado por |
+|---|---|---|
+| `public/voiceover/<Composicao>/` | Locução (`cena-0N.mp3`) | `scripts/gerar-locucao.ts` (ElevenLabs) |
+| `public/imagens/<Composicao>/` | Imagens geradas ou editadas | `scripts/gerar-imagem-ia.ts` (Magnific) |
+| `public/videos/<Composicao>/` | B-roll e vídeo gerado | `scripts/gerar-video-ia.ts` (Magnific) |
+| `public/audio/<Composicao>/` | Trilha e efeitos sonoros | Cliente Magnific em `scripts/lib/magnific.ts` |
+
+> ⚠️ As URLs devolvidas pela Magnific são temporárias. **Baixe sempre para `public/`** — apontar uma composição para a URL faz o render quebrar dias depois, sem aviso.
