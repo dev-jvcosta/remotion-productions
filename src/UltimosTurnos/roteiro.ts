@@ -47,21 +47,21 @@ export const ROTEIRO: CenaRoteiro[] = [
     id: "cena-03",
     titulo: "Só o nome mudou",
     narracao:
-      "Agora ela se chama Mot., de motorista. Apenas o nome mudou. O cálculo e as cores continuam iguais.",
+      "Agora ela se chama Km/l Mot., de motorista. Apenas o nome mudou. O cálculo, e as cores continuam iguais.",
     duracaoFallbackEmSegundos: 8,
   },
   {
     id: "cena-04",
     titulo: "A coluna nova",
     narracao:
-      "A novidade é a coluna Ant., de anterior. Ela mostra a sua média da semana passada. Se Mot. for igual ou maior que Ant., fica verde. Se for menor, fica vermelha.",
+      "A novidade é a coluna Km/l Ant., de anterior. Ela mostra a sua média da semana passada. Se Km/l Mot. for igual ou maior que Km/l Ant., fica verde. Se for menor, fica vermelha.",
     duracaoFallbackEmSegundos: 12,
   },
   {
     id: "cena-05",
     titulo: "Lendo as duas juntas",
     narracao:
-      "Repare nesta linha: Mot. verde, Ant. vermelho. Você foi melhor que a média da linha, mas rodou abaixo do que você mesmo fez na semana passada. São duas perguntas diferentes.",
+      "Repare nesta linha: Km/l Móti em verde, Km/l Anti em vermelho. Você foi melhor que a média da linha, mas rodou abaixo do que você mesmo fez na semana passada. São duas perguntas diferentes.",
     duracaoFallbackEmSegundos: 13,
   },
   {

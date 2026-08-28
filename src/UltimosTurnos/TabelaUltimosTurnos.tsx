@@ -49,7 +49,7 @@ const LINHA_GAP = 8;
 export type TabelaProps = {
   /** 0 = coluna "Ant." escondida, 1 = totalmente aberta. */
   revelarAnt: number;
-  /** 0 = cabeçalho escrito "Km/l", 1 = escrito "Mot.". */
+  /** 0 = cabeçalho escrito "Km/l", 1 = escrito "Km/l Mot.". */
   renomearCabecalho: number;
   /** 0 = sem o cabeçalho laranja agrupador, 1 = com ele. */
   grupoKmL: number;
@@ -211,7 +211,15 @@ export const TabelaUltimosTurnos: React.FC<TabelaProps> = ({
             >
               <span style={{ width: L_DIA, textAlign: "center" }}>{linha.dia}</span>
               <span style={{ width: L_TURNO, textAlign: "center" }}>{linha.turno}</span>
-              <span style={{ width: L_CARRO, textAlign: "center" }}>{linha.carro}</span>
+              <span
+                style={{
+                  width: L_CARRO,
+                  textAlign: "center",
+                  filter: "blur(8px)",
+                }}
+              >
+                {linha.carro}
+              </span>
             </div>
 
             <Celula x={X_MOT} largura={L_MOT} positivo={linha.motPositivo} opacidade={apagadaColuna("kml")}>
