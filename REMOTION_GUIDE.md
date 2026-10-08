@@ -11,7 +11,7 @@ Precisamos que cada roteiro aprovado gere um arquivo `video-manifest.json`. O Re
 
 {
   "meta": {
-    "fps": 25,
+    "fps": 30,
     "themeColor": "#ffcc00",
     "secondaryColor": "#000000",
     "thirdColor": "#ffffff",
