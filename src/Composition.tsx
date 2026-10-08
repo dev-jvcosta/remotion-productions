@@ -11,8 +11,8 @@ export const MyComposition = () => {
     <Composition
       id="MyComp"
       component={MyComponent}
-      durationInFrames={60}
-      fps={30}
+      durationInFrames={120}
+      fps={60}
       width={3840}
       height={2160}
       calculateMetadata={calculateMetadata}
