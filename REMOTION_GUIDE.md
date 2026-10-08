@@ -11,7 +11,7 @@ Precisamos que cada roteiro aprovado gere um arquivo `video-manifest.json`. O Re
 
 {
   "meta": {
-    "fps": 25,
+    "fps": 60,
     "themeColor": "#ffcc00",
     "secondaryColor": "#000000",
     "thirdColor": "#ffffff",
@@ -89,5 +89,5 @@ Sempre que eu solicitar um novo roteiro, sua resposta DEVE ser dividida estritam
 2. MANIFESTO DE MOTION: O bloco de código JSON purificado contendo os tempos exatos baseados na leitura estimada da fala (considere a média de 130 a 150 palavras por minuto para o cálculo do triggerSecond).
 3. INTERPOLAÇÃO DE CURVAS: Fuja dos movimentos lineares. Use curvas de aceleração e desaceleração (Easy Ease) personalizadas para dar peso e realismo.
 4. MOTION BLUR E SMEAR: Aplique o desfoque de movimento nativo ou crie deformações manuais em movimentos muito rápidos para simular a percepção do olho humano.
-5. COMPRESSÃO DE VÍDEO: Utilize o codec H.264 com um bitrate adequado para garantir a qualidade do vídeo final.
+5. COMPRESSÃO DE VÍDEO: Os motions gerados pelo Remotion como overlay com fundo transparente saem em 4K (3840×2160), 60 fps, `.mov` ProRes 4444 com canal alfa. O ProRes vale só para esses motions; os demais vídeos do projeto não seguem esta regra.
 6. PRINCÍPIOS DE ANIMAÇÃO: Aplique conceitos clássicos adaptados ao design digital, especialmente Esticar e Encolher (Squash and Stretch), Antecipação e Sobrereação (Overshoot).

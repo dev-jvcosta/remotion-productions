@@ -10,7 +10,8 @@ import { enableTailwind } from '@remotion/tailwind-v4';
 
 Config.setRspack(true);
 
-// Overlay para o Final Cut Pro: .mov ProRes 4444 com canal alfa (decisão de 2026-09-25).
+// Overlay para o Final Cut Pro: .mov ProRes 4444 com canal alfa (decisão de 2026-09-25),
+// em 4K / 60 fps (src/Composition.tsx; decisão de 2026-10-08). Só para motions com fundo transparente.
 // Os três precisam andar juntos: JPEG não tem alfa, e sem o pixel format "yuva" o
 // ProRes sai opaco mesmo com quadros PNG.
 Config.setVideoImageFormat("png");
